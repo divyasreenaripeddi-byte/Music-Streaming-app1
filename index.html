@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BeatBox - Music Streaming</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <h1 class="logo">🎵 BeatBox</h1>
+        <nav>
+            <button onclick="showSection('home')">Home</button>
+            <button onclick="showSection('songs')">Songs</button>
+            <button onclick="showSection('playlist')">Playlist</button>
+            <button onclick="showSection('favorites')">Favorites ♥</button>
+            <button onclick="showSection('login')">Login</button>
+            <button onclick="showSection('signup')">Signup</button>
+            <button onclick="showSection('admin')">Admin</button>
+        </nav>
+        <span id="welcomeUser"></span>
+    </header>
+
+    <!-- HOME -->
+    <section id="home" class="section active">
+        <div class="hero">
+            <h2>Feel the Music 🎧</h2>
+            <p>Listen to your favourite songs anytime, anywhere.</p>
+            <button onclick="showSection('songs')">Explore Songs</button>
+        </div>
+
+        <h2>Featured Songs</h2>
+        <div id="featuredSongs" class="song-grid"></div>
+    </section>
+
+    <!-- SONGS -->
+    <section id="songs" class="section">
+        <h2>All Songs</h2>
+        <input type="text" id="searchInput"
+               placeholder="Search songs or artists..."
+               oninput="searchSongs()">
+        <div id="songList" class="song-grid"></div>
+    </section>
+
+    <!-- PLAYLIST -->
+    <section id="playlist" class="section">
+        <h2>My Playlist</h2>
+        <div id="playlistSongs" class="song-grid"></div>
+    </section>
+
+    <!-- FAVORITES -->
+    <section id="favorites" class="section">
+        <h2>My Favorite Songs ♥</h2>
+        <div id="favoriteSongs" class="song-grid"></div>
+    </section>
+
+    <!-- LOGIN -->
+    <section id="login" class="section">
+        <div class="form-container">
+            <h2>Login to BeatBox</h2>
+            <form onsubmit="userLogin(event)">
+                <input type="email" id="loginEmail"
+                       placeholder="Enter Email" required>
+                <input type="password" id="loginPassword"
+                       placeholder="Enter Password" required>
+                <button type="submit">Login</button>
+            </form>
+            <p id="loginMessage"></p>
+            <p>Don't have an account?
+                <a href="#" onclick="showSection('signup')">Sign Up</a>
+            </p>
+        </div>
+    </section>
+
+    <!-- SIGNUP -->
+    <section id="signup" class="section">
+        <div class="form-container">
+            <h2>Create Account</h2>
+            <form onsubmit="userSignup(event)">
+                <input type="text" id="signupName"
+                       placeholder="Enter Name" required>
+                <input type="email" id="signupEmail"
+                       placeholder="Enter Email" required>
+                <input type="password" id="signupPassword"
+                       placeholder="Create Password" required>
+                <button type="submit">Sign Up</button>
+            </form>
+            <p id="signupMessage"></p>
+            <p>Already have an account?
+                <a href="#" onclick="showSection('login')">Login</a>
+            </p>
+        </div>
+    </section>
+
+    <!-- ADMIN LOGIN -->
+    <section id="admin" class="section">
+        <div class="form-container" id="adminLoginBox">
+            <h2>Admin Login</h2>
+            <form onsubmit="adminLogin(event)">
+                <input type="text" id="adminUsername"
+                       placeholder="Admin Username" required>
+                <input type="password" id="adminPassword"
+                       placeholder="Admin Password" required>
+                <button type="submit">Admin Login</button>
+            </form>
+            <p id="adminMessage"></p>
+        </div>
+
+        <!-- ADMIN DASHBOARD -->
+        <div id="adminDashboard" class="admin-dashboard hidden">
+            <h2>Admin Dashboard</h2>
+            <button onclick="adminLogout()">Logout</button>
+
+            <div class="stats">
+                <div class="stat-card">
+                    <h3 id="totalSongs">0</h3>
+                    <p>Total Songs</p>
+                </div>
+                <div class="stat-card">
+                    <h3 id="totalUsers">0</h3>
+                    <p>Total Users</p>
+                </div>
+            </div>
+
+            <h3>Manage Songs</h3>
+            <form onsubmit="addSong(event)" class="admin-form">
+                <input type="text" id="newSongTitle"
+                       placeholder="Song Title" required>
+                <input type="text" id="newSongArtist"
+                       placeholder="Artist Name" required>
+                <input type="text" id="newSongFile"
+                       placeholder="Audio file path (example: songs/song1.mp3)"
+                       required>
+                <button type="submit">Add Song</button>
+            </form>
+
+            <div id="adminSongList"></div>
+            <h3>Registered Users</h3>
+            <div id="adminUserList"></div>
+        </div>
+    </section>
+
+    <!-- MUSIC PLAYER -->
+    <div class="music-player">
+        <div>
+            <strong id="currentSong">Select a song</strong>
+            <p id="currentArtist">BeatBox Music Player</p>
+        </div>
+        <audio id="audioPlayer" controls></audio>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <h2>🎵 BeatBox</h2>
+        <p>Your music, your mood.</p>
+        <div class="footer-links">
+            <button onclick="showSection('home')">Home</button>
+            <button onclick="showSection('songs')">Songs</button>
+            <button onclick="showSection('playlist')">Playlist</button>
+            <button onclick="showSection('favorites')">Favorites</button>
+            <button onclick="showSection('login')">Login</button>
+        </div>
+        <p>© 2026 BeatBox Music App. All Rights Reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
